@@ -12,16 +12,23 @@ fetch('https://api.github.com/users/duffing09', {
 .then((data) => {
     console.log(data)
     console.log(data.name)
-let name = document.createElement('div')
+
+    let imgDiv = document.createElement('img')
+    imgDiv.src = data.avatar_url
+    information.appendChild(imgDiv)
+
+let name = document.createElement('h2')
 name.innerText = data.name
 information.appendChild(name)
+
 
 let location = document.createElement('p')
 location.innerText = `location: ${data.location}`
 information.appendChild(location)
 
-let urlDiv = document.createElement('p')
+let urlDiv = document.createElement('a')
 urlDiv.innerText = `GitHub URL: ${data.html_url}`
+urlDiv.href = data.html_url
 information.appendChild(urlDiv)
 
 let userDiv = document.createElement('p')
@@ -36,17 +43,25 @@ information.appendChild(userDiv)
 //     }
 })
 
-const repos = document.querySelector('#repos')
+const repoList = document.querySelector('#repoList')
 fetch('https://api.github.com/users/duffing09/repos', {
     method: 'GET',
-    headers: {"Content-Type": "application/json"}
+    headers: {'Content-Type': 'application/json'}
 })
-
     .then((response) =>{
         console.log(response)
         return response.json()
 })
 
-.then((data) => {
-    console.log(data)
+.then((repos) => {
+    console.log(repos)
+    //this is listing the repos in the console
+    for (let repo of repos) {
+        console.log(repo.name)
+let repoDiv = document.createElement('a')
+repoDiv.innerText = repo.name
+repoDiv.href = repo.html_url
+repoList.appendChild(repoDiv)
+
+    }
 })

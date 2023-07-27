@@ -1,0 +1,11 @@
+#repoList {
+    display: flex;
+    flex-direction: column;
+}
+
+.repoStyle {
+}
+img {
+    border-radius: 60%;
+    width: 42%;
+}
